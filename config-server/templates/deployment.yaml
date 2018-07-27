@@ -1,11 +1,11 @@
-{{- $name := include "soil.name" . -}}
+{{- $name := include "config-server.name" . -}}
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
   name: {{ $name }}
   labels:
     app: {{ $name }}
-    chart: {{ template "soil.chart" . }}
+    chart: {{ template "config-server.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
     tier: backend
@@ -28,13 +28,3 @@ spec:
             - name: http
               containerPort: {{ .Values.container.port }}
               protocol: TCP
-          env:
-            - name: kubernetes.proxy.url
-              value: "http://localhost:9000"
-          volumeMounts:
-            - mountPath: /root/.kube
-              name: kubectl-creds
-      volumes:
-      - name: kubectl-creds
-        secret:
-          secretName: kubectl-credentials

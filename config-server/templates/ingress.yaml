@@ -1,0 +1,33 @@
+{{- if .Values.ingress.enabled -}}
+{{- $name := include "soil.name" . -}}
+{{- $tld := .Values.ingress.tld }}
+{{- $namespace := .Release.Namespace }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $name }}
+  labels:
+    app: {{ $name }}
+    chart: {{ template "config-server.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    tier: backend
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.org/ssl-services: {{ $name | quote }}
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+    - hosts:
+      - "{{ $name }}.{{ $tld }}"
+      secretName: {{ $name }}-certificate
+  rules:
+  - host: "{{ $name }}.{{ $tld }}"
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ $name }}
+          servicePort: http
+{{- end }}

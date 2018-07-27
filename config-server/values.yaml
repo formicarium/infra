@@ -6,11 +6,11 @@ deployment:
   replicaCount: 1
 
 container:
-  port: 8080
+  port: 8081
 
 image:
-  repository: formicarium/soil
-  tag: 3f781640830d523806cd5da4723307d4d6599dc3
+  repository: formicarium/config-server-example
+  tag: 0.0.1
 
 service:
   port: 80

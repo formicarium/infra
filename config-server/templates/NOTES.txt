@@ -1,0 +1,4 @@
+1. Get the application URL by running these commands:
+{{- $name := include "soil.name" . -}}
+
+{{ $name }} deployed to {{ .Release.Namespace }}, version {{ .Values.image.tag}}
