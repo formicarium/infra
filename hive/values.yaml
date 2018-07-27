@@ -1,4 +1,4 @@
-# Default values for belessa.
+# Default values for hive.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -6,11 +6,11 @@ deployment:
   replicaCount: 1
 
 container:
-  port: 8081
+  port: 8080
 
 image:
-  repository: formicarium/config-server-example
-  tag: 0.0.1
+  repository: formicarium/hive
+  tag: 43af3e6f93aabaed1a770870be78edd7c8e280c9
 
 service:
   port: 80

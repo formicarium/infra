@@ -1,4 +1,4 @@
 1. Get the application URL by running these commands:
-{{- $name := include "belessa.name" . -}}
+{{- $name := include "hive.name" . -}}
 
 {{ $name }} deployed to {{ .Release.Namespace }}, version {{ .Values.image.tag}}

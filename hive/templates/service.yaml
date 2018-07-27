@@ -1,11 +1,11 @@
-{{- $name := include "belessa.name" . -}}
+{{- $name := include "hive.name" . -}}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ $name }}
   labels:
     app: {{ $name }}
-    chart: {{ template "belessa.chart" . }}
+    chart: {{ template "hive.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
     tier: backend

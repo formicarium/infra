@@ -1,4 +1,4 @@
-# Default values for belessa.
+# Default values for test.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -6,10 +6,10 @@ deployment:
   replicaCount: 1
 
 container:
-  port: 8081
+  port: 8080
 
 image:
-  repository: formicarium/config-server-example
+  repository: rafa93br/test
   tag: 0.0.1
 
 service:
