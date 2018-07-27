@@ -9,7 +9,7 @@ container:
   port: 8080
 
 image:
-  repository: crccheck/hello-world
+  repository: formicarium/soil
   tag: 17fb678b7c3b8f228d12a70b1b43e42338612e1d
 
 service:
