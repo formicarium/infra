@@ -10,7 +10,7 @@ container:
 
 image:
   repository: formicarium/config-server-example
-  tag: 0.0.1
+  tag: 0.0.4
 
 service:
   port: 80
