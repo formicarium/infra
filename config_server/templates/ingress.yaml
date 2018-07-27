@@ -14,14 +14,14 @@ metadata:
     tier: backend
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.org/ssl-services: {{ $name | quote }}
-    kubernetes.io/tls-acme: "true"
+    # ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.org/ssl-services: {{ $name | quote }}
+    # kubernetes.io/tls-acme: "true"
 spec:
-  tls:
-    - hosts:
-      - "{{ $name }}.{{ $tld }}"
-      secretName: {{ $name }}-certificate
+  # tls:
+  #   - hosts:
+  #     - "{{ $name }}.{{ $tld }}"
+  #     secretName: {{ $name }}-certificate
   rules:
   - host: "{{ $name }}.{{ $tld }}"
     http:
