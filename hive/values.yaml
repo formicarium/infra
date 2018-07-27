@@ -10,7 +10,7 @@ container:
 
 image:
   repository: formicarium/hive
-  tag: 43af3e6f93aabaed1a770870be78edd7c8e280c9
+  tag: 31ba77ad823ac93c766dcb15f9162bf57f585a27
 
 service:
   port: 80
