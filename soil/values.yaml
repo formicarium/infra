@@ -10,7 +10,7 @@ container:
 
 image:
   repository: formicarium/soil
-  tag: 9965ae84bfbeebd61d1ce68d213af7ef237d1a0d
+  tag: dfa95776dc66f22f163a7dfaecb41490b4342053 #aea104762e7dbeca6cab64f6e8045351c6182657
 
 service:
   port: 80
