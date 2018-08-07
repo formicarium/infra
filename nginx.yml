@@ -1,0 +1,5 @@
+rbac:
+  create: true
+
+tcp:
+  9000: default/my-nginx-nginx-ingress-default-backend:80
