@@ -10,7 +10,7 @@ container:
 
 image:
   repository: formicarium/soil
-  tag: 0.0.8
+  tag: 0.0.9
 
 service:
   port: 80
