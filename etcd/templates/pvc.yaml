@@ -1,0 +1,14 @@
+{{- $name := include "etcd.name" . -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "{{ $name }}-pv-claim"
+  labels:
+    type: amazonEBS
+    app: {{ $name }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.volumes.size }}

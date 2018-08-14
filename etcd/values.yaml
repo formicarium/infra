@@ -1,0 +1,9 @@
+# Default values for soil.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+deployment:
+  replicaCount: 1
+
+volumes:
+  size: 5Gi

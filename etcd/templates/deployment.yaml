@@ -1,0 +1,52 @@
+{{- $name := include "etcd.name" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ $name }}-deployment"
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $name }}
+      etcd_node: {{ $name  }}0
+  template:
+    metadata:
+      labels:
+        app: {{ $name }}
+        etcd_node: {{ $name }}0
+    spec:
+      volumes:
+      - name: etcd-data
+        persistentVolumeClaim:
+          claimName: "{{ $name }}-pv-claim"
+      containers:
+      - command:
+        - /usr/local/bin/etcd
+        - --name
+        - "{{ $name }}0"
+        - --data-dir
+        - /etcd-data
+        - --initial-advertise-peer-urls
+        - http://{{ $name }}0:2380
+        - --listen-peer-urls
+        - http://0.0.0.0:2380
+        - --listen-client-urls
+        - http://0.0.0.0:2379
+        - --advertise-client-urls
+        - http://{{ $name }}0:2379
+        - --initial-cluster
+        - fmc-etcd0=http://{{ $name }}0:2380
+        - --initial-cluster-state
+        - new
+        image: quay.io/coreos/etcd:latest
+        name: {{ $name }}0
+        volumeMounts:
+        - mountPath: /etcd-data
+          name: etcd-data
+        ports:
+        - containerPort: 2379
+          name: client
+          protocol: TCP
+        - containerPort: 2380
+          name: server
+          protocol: TCP

@@ -1,0 +1,34 @@
+{{- $name := include "etcd.name" . -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ $name }}-client"
+spec:
+  ports:
+  - name: "{{ $name }}-client-port"
+    port: 2379
+    protocol: TCP
+    targetPort: 2379
+  selector:
+    app: {{ $name }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    etcd_node: "{{ $name }}0"
+  name: "{{ $name }}0"
+spec:
+  ports:
+  - name: client
+    port: 2379
+    protocol: TCP
+    targetPort: 2379
+  - name: server
+    port: 2380
+    protocol: TCP
+    targetPort: 2380
+  selector:
+    etcd_node: "{{ $name }}0"
