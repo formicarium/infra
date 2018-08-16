@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dynamodb
+  labels:
+    app: dynamodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dynamodb
+  template:
+    metadata:
+      labels:
+        app: dynamodb
+    spec:
+      containers:
+      - name: dynamodb
+        image: quay.io/nubank/nudev-dynamodb
+        ports:
+        - containerPort: 8000
+      imagePullSecrets:
+      - name: gusa20-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dynamodb
+  labels:
+    app: dynamodb
+spec:
+  ports:
+    port: 8000
+    protocol: TCP
+  selector:
+    app: dynamodb

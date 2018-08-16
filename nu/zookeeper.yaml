@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper
+  labels:
+    app: zookeeper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zookeeper
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+      - name: zookeeper
+        image: quay.io/nubank/nudev-exhibitor
+        ports:
+        - containerPort: 2888
+        - containerPort: 2181
+        - containerPort: 3888 
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: gusa20-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper
+  labels:
+    app: zookeeper
+spec:
+  ports:
+  - name: client
+    port: 2181
+    protocol: TCP
+  - name: follower
+    port: 2888
+    protocol: TCP
+  - name: leader
+    port: 3888
+    protocol: TCP
+  - name: exhibitor
+    port: 8080
+    protocol: TCP
+  selector:
+    app: zookeeper

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transactor   
+  labels:
+    app: transactor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transactor
+  template:
+    metadata:
+      labels:
+        app: transactor
+    spec:
+      containers:
+      - name: transactor
+        image: quay.io/nubank/nudev-transactor
+        ports:
+        - containerPort: 4334
+        - containerPort: 4335
+        - containerPort: 4336
+      imagePullSecrets:
+      - name: gusa20-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: transactor
+  labels:
+    app: transactor
+spec:
+  ports:
+    port: 4334
+    protocol: TCP
+    port: 4335
+    protocol: TCP
+    port: 4336
+    protocol: TCP
+  selector:
+    app: dynamodb
