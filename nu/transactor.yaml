@@ -14,6 +14,7 @@ spec:
       labels:
         app: transactor
     spec:
+      hostname: transactor
       containers:
       - name: transactor
         env:
@@ -21,6 +22,8 @@ spec:
             value: "transactor"
           - name: TRANSACTOR_PORT
             value: "4334"
+          - name: TRANSACTOR_ALT_HOST
+            value: "transactor"
         image: quay.io/nubank/nudev-transactor
         ports:
         - containerPort: 4334
@@ -38,13 +41,16 @@ metadata:
 spec:
   ports:
   - name: seila1
+    targetPort: 4334
     port: 4334
     protocol: TCP
   - name: seila2
+    targetPort: 4335
     port: 4335
     protocol: TCP
   - name: seila3
+    targetPort: 4336
     port: 4336
     protocol: TCP
   selector:
-    app: dynamodb
+    app: transactor
