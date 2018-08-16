@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: transactor   
+  name: transactor
   labels:
     app: transactor
 spec:
@@ -16,6 +16,11 @@ spec:
     spec:
       containers:
       - name: transactor
+        env:
+          - name: TRANSACTOR_HOST
+            value: "transactor"
+          - name: TRANSACTOR_PORT
+            value: "4334"
         image: quay.io/nubank/nudev-transactor
         ports:
         - containerPort: 4334
