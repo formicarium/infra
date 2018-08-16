@@ -30,7 +30,7 @@ metadata:
     app: dynamodb
 spec:
   ports:
-    port: 8000
+  - port: 8000
     protocol: TCP
   selector:
     app: dynamodb

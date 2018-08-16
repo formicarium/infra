@@ -32,10 +32,13 @@ metadata:
     app: transactor
 spec:
   ports:
+  - name: seila1
     port: 4334
     protocol: TCP
+  - name: seila2
     port: 4335
     protocol: TCP
+  - name: seila3
     port: 4336
     protocol: TCP
   selector:
